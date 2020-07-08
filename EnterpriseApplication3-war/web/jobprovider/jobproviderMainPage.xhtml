@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body >
+        <ui:composition template="/templates/assignmentTemplate.xhtml">
+            <ui:define name="content">
+
+                <h1>Your log in type is job provider</h1>
+                <br/><br/>
+
+
+                <h:form>
+                    <h1><h:commandLink value="Log Out" action="/index.xhtml" ></h:commandLink></h1>
+                </h:form>
+
+
+                <h2> ALL JOBS PROVIDED by you</h2>
+                <hr/>
+                <h:form>
+                    <h:dataTable value= '#{jobsManager.myProvidedJobs()}' var = 'Job' border="3"   width="300" cellpadding='5'>
+                        <h:column>
+                            <f:facet name ='header'>JOB ID</f:facet>
+                            <h:outputText value="#{Job.jobid}"></h:outputText>                    
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Title</f:facet>
+                            <h:outputText value="#{Job.title}"></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Provider</f:facet>
+                            <h:outputText value="#{Job.provider}"></h:outputText>
+                        </h:column>    
+
+                        <h:column>
+                            <f:facet name ='header'>Keywords</f:facet>
+                            <h:outputText value="#{Job.keywords}"></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Job description</f:facet>
+                            <h:outputText value="#{Job.description}" ></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Payment</f:facet>
+                            <h:outputText value="#{Job.payment}"></h:outputText>
+                        </h:column>   
+
+                        <h:column>
+                            <f:facet name ='header'>Status</f:facet>
+                            <h:outputText value="#{Job.status}"></h:outputText>
+                        </h:column> 
+
+                        <h:column>
+                            <f:facet name ='header'>freelancer</f:facet>
+                            <h:outputText value="#{Job.offers}"></h:outputText>
+                        </h:column> 
+
+                        <h:column>
+                            <f:facet name ='header'>Delete Jobs</f:facet>
+                            <h:commandButton value="DELETE" action="#{jobsManager.delete(Job)}" >                        
+                            </h:commandButton>
+                        </h:column>
+
+                    </h:dataTable>   
+                </h:form>
+
+
+                <h:dataTable value= '#{jobsManager.myProvidedJobs()}' var = 'Job' border="3"   width="300" cellpadding='2' rows='1'>
+
+
+                    <h:column>
+
+                        <f:facet name ='header'>Add Job </f:facet>
+                        <h:form>
+                            <h:panelGrid columns="2">
+                                Job ID:
+                                <h:inputText value="#{jobsManagedBean.job_id}" />
+                                Title:
+                                <h:inputText value="#{jobsManagedBean.title}" />
+                                Keywords:
+                                <h:inputText value="#{jobsManagedBean.keywords}" />
+                                Description:
+                                <h:inputText value="#{jobsManagedBean.description}" />
+                                Payment:
+                                <h:inputText value="#{jobsManagedBean.payment}" />
+                                Status:
+                                <h:inputText value="#{jobsManagedBean.status}" />
+                                <h:panelGroup/>
+                                <h:commandButton value="Add" action="#{jobsManager.add()}" />
+                            </h:panelGrid>
+
+
+                        </h:form>
+
+
+                    </h:column> 
+                    <h:column>
+
+                        <f:facet name ='header'>Freelancer's info </f:facet>
+                        <h:form>
+
+                            <h:panelGrid columns="2">
+                                Username:
+                                <h:outputText value="#{infoBean.username}" />
+                                Skills:
+                                <h:outputText value="#{infoBean.skills}" />
+                                Message:
+                                <h:outputText value="#{infoBean.message}" />
+                                freelancerID:
+                                <h:outputText value="#{infoBean.freelancerID}" />
+
+                                <h:panelGroup/>
+                            </h:panelGrid>
+
+                        </h:form>
+
+
+                    </h:column> 
+
+
+
+
+
+                </h:dataTable>
+
+                <br/><br/><br/>
+                <h2> All  Jobs  application from freelancers</h2>
+                <hr/>
+                <h:form>
+                    <h:dataTable value= '#{jobsManager.myJobsWithOffers()}' var = 'Job' border="3"   width="300" cellpadding='5'>
+                        <h:column>
+                            <f:facet name ='header'>JOB ID</f:facet>
+                            <h:outputText value="#{Job.jobid}"></h:outputText>                    
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Title</f:facet>
+                            <h:outputText value="#{Job.title}"></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Provider</f:facet>
+                            <h:outputText value="#{Job.provider}"></h:outputText>
+                        </h:column>    
+
+                        <h:column>
+                            <f:facet name ='header'>Keywords</f:facet>
+                            <h:outputText value="#{Job.keywords}"></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Job description</f:facet>
+                            <h:outputText value="#{Job.description}" ></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Payment</f:facet>
+                            <h:outputText value="#{Job.payment}"></h:outputText>
+                        </h:column>   
+
+                        <h:column>
+                            <f:facet name ='header'>Status</f:facet>
+                            <h:outputText value="#{Job.status}"></h:outputText>
+                        </h:column> 
+
+                        <h:column>
+                            <f:facet name ='header'>freelancer</f:facet>
+                            <h:outputText value="#{Job.offers}"></h:outputText>
+                        </h:column> 
+
+
+                        <h:column>
+                            <f:facet name ='header'>View </f:facet>
+                            <h:commandButton value="VIEW" action="#{infoManager.viewFreelancer(Job)}" >                        
+                            </h:commandButton>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Accept</f:facet>
+                            <h:commandButton value="ACCEPT" action="#{jobsManager.acceptRequest(Job)}" ></h:commandButton>
+                         </h:column>   
+                            
+                        <h:column>
+                            <f:facet name ='header'>Reject</f:facet>
+                            <h:commandButton value="REJECT" action="#{jobsManager.rejectRequest(Job)}" ></h:commandButton>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Complete</f:facet>
+                            <h:commandButton value="COMPLETE" action="#{infoManager.complete(Job)}" ></h:commandButton>
+                        </h:column>
+
+                    </h:dataTable>   
+                </h:form>
+
+
+                <h:form>
+                    <h:dataTable  >
+                        <h:column>
+                            <f:facet name ='header'>Username</f:facet>
+                            <h:outputText value="#{infoBean.username}"></h:outputText>                    
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Freelance ID</f:facet>
+                            <h:outputText value="#{infoBean.freelanceId}"></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>SKILLS</f:facet>
+                            <h:outputText value="#{infoBean.skills}"></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>MESSAGE</f:facet>
+                            <h:outputText value="#{infoBean.message}" ></h:outputText>
+                        </h:column>
+
+                    </h:dataTable> 
+                </h:form>
+
+            </ui:define> 
+        </ui:composition>        
+    </h:body>
+</html>
+

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>See open jobs</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <ui:composition template="/templates/assignmentTemplate.xhtml">
+            <ui:define name="content">
+                <h2> You can see all open jobs here </h2>
+                <hr/>
+                <h:form>
+                    <h:dataTable value= '#{jobsManager.openJobs()}' var = 'Job' border="3"   width="300" cellpadding='5' >
+                        <h:column>
+                            <f:facet name ='header'>Job id</f:facet>
+                            <h:outputText value="#{Job.jobid}"></h:outputText>                    
+                        </h:column>
+                        <h:column>
+                            <f:facet name ='header'>Job description</f:facet>
+                            <h:outputText value="#{Job.description}" ></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Keywords</f:facet>
+                            <h:outputText value="#{Job.keywords}"></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Name</f:facet>
+                            <h:outputText value="#{Job.title}"></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Payment</f:facet>
+                            <h:outputText value="#{Job.payment}"></h:outputText>
+                        </h:column>   
+
+                        <h:column>
+                            <f:facet name ='header'>Status</f:facet>
+                            <h:outputText value="#{Job.status}"></h:outputText>
+                        </h:column> 
+
+                        <h:column>
+                            <f:facet name ='header'>Undertake</f:facet>
+                            <h:commandButton value="UNDERTAKE" action="#{jobsManager.underTake(Job)}" >                        
+                            </h:commandButton>
+                        </h:column>
+
+                    </h:dataTable>   
+                </h:form>
+                <h:form>
+                    <h:commandLink value="MainPage" action="/freelancer/freelancerMainPage" ></h:commandLink>
+                    <br/><br/><br/>
+                    <h:commandLink value="Log Out" action="/index" ></h:commandLink>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

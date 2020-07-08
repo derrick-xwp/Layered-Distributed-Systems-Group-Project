@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Administor Page</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/templates/assignmentTemplate.xhtml">
+            <ui:define name="content">
+
+                <h2>Your login type is: Administor!</h2>
+
+                <h2> All the jobs available, you can see the status or delete them </h2>
+
+                <h:form>
+                    <h:dataTable value= '#{jobsManager.all}' var = 'Job' border="3"   width="300" cellpadding='5'>
+                        <h:column>
+                            <f:facet name ='header'>Job ID</f:facet>
+                            <h:outputText value="#{Job.jobid}"></h:outputText>                    
+                        </h:column>
+                        <h:column>
+                            <f:facet name ='header'>job Title</f:facet>
+                            <h:outputText value="#{Job.title}"></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Job Provider</f:facet>
+                            <h:outputText value="#{Job.provider}"></h:outputText>
+                        </h:column>                 
+
+                        <h:column>
+                            <f:facet name ='header'>Job Keywords</f:facet>
+                            <h:outputText value="#{Job.keywords}"></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Job Description</f:facet>
+                            <h:outputText value="#{Job.description}" ></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Job Payment</f:facet>
+                            <h:outputText value="#{Job.payment}"></h:outputText>
+                        </h:column>   
+
+                        <h:column>
+                            <f:facet name ='header'>Job Status</f:facet>
+                            <h:outputText value="#{Job.status}"></h:outputText>
+                        </h:column> 
+
+                        <h:column>
+                            <f:facet name ='header'>Delete?</f:facet>
+                            <h:commandButton value="Delete" action="#{jobsManager.delete(Job)}" >                        
+                            </h:commandButton>
+                        </h:column>
+                    </h:dataTable>   
+                </h:form>
+
+                <h3> All the registered users are in the following form, you can change their info or delete them</h3>
+                <hr/>
+                <h:form>
+                    <h:dataTable value= '#{userManager.all}' var = 'User' border="3"   width="300" cellpadding='5'>
+                        <h:column>
+                            <f:facet name ='header'>Username</f:facet>
+                            <h:outputText value="#{User.username}"></h:outputText>                    
+                        </h:column>
+                        <h:column>
+                            <f:facet name ='header'>First Name</f:facet>
+                            <h:outputText value="#{User.firstname}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name ='header'>Last Name</f:facet>
+                            <h:outputText value="#{User.lastname}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name ='header'>Role</f:facet>
+                            <h:outputText value="#{User.role}" ></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name ='header'>Home Address</f:facet>
+                            <h:outputText value="#{User.address}"></h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name ='header'>Change User Info</f:facet>
+                            <h:commandButton value="Change" action="#{userManager.edit(User)}" >                        
+                            </h:commandButton>
+                        </h:column> 
+
+                        <h:column>
+                            <f:facet name ='header'>Delete</f:facet>
+                            <h:commandButton value="Delete" action="#{userManager.delete(User)}" >                        
+                            </h:commandButton>
+                        </h:column>
+
+                    </h:dataTable>   
+                </h:form>
+
+
+
+
+
+
+
+                <h:dataTable value='#{jobsManager.myProvidedJobs()}' var = 'Job'  border="3"   width="600" cellpadding='2' rows='1'>
+                    <h:column>
+                        <f:facet name ='header'>Add New User Here</f:facet>
+                        <h:form>
+                            <h:panelGrid columns="2">
+                                User Name:
+                                <h:inputText value="#{usersManagedBean.username}" />
+                                Role:
+                                <h:inputText value="#{usersManagedBean.role}" />
+                                First Name:
+                                <h:inputText value="#{usersManagedBean.firstname}" />
+                                Last Name:
+                                <h:inputText value="#{usersManagedBean.lastname}" />
+                                Home Address:
+                                <h:inputText value="#{usersManagedBean.address}" />
+                                Password:
+                                <h:inputText value="#{usersManagedBean.password}" />
+                                <h:panelGroup/>
+                                <h:commandButton value="Add" action="#{userManager.add()}" />
+                            </h:panelGrid>   
+                        </h:form>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name ='header'>Change User Info Here</f:facet>
+
+                        <h:form>
+                            <h:panelGrid columns="2">
+                                Username:
+                                <h:outputText value="#{usersManagedBean.username}" />
+                                Role
+                                <h:inputText value="#{usersManagedBean.role}" />
+                                First name: 
+                                <h:inputText value="#{usersManagedBean.firstname}" />
+                                Last name:
+                                <h:inputText value="#{usersManagedBean.lastname}" />
+                                Home Address:
+                                <h:inputText value="#{usersManagedBean.address}" />
+                                <h:panelGroup/>
+                                <h:commandButton value="Change" action="#{userManager.save()}" />
+                            </h:panelGrid>
+                        </h:form>
+
+
+                    </h:column>
+                </h:dataTable>
+
+                <h:form>
+                    <h1><h:commandLink value="Click here to Log Out" action="/index.xhtml" ></h:commandLink></h1>
+                </h:form>    
+            </ui:define> 
+        </ui:composition>
+    </h:body>
+
+
+</html>
+
